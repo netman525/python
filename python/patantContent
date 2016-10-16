@@ -1,0 +1,516 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<title>专利查询结果展示-公布模式</title>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/qrcode.js"></script>
+<script type="text/javascript" src="js/datecheck.js"></script>
+<script type="text/javascript" src="js/msearch.js"></script>
+<script type="text/javascript" src="js/psearch.js"></script>
+<script type="text/javascript" src="js/pam.js"></script>
+<script type="text/javascript" src="js/gb.js"></script>
+<script type="text/javascript" src="js/zytp.js"></script>
+<script type="text/javascript" src="js/mask.js"></script>
+<script type="text/javascript">
+function setup(pato) {
+	pato.showType.value = "1";
+	pato.strSources.value = "pip";
+	pato.strWhere.value = "AD=BETWEEN['2001.01.01','2010.12.31'] and PA=%浙江大学%";
+	pato.numSortMethod.value = "0";
+	pato.strLicenseCode.value = "";
+	pato.numIp.value = "";
+	pato.numIpc.value = "";
+	pato.numIg.value = "";
+	pato.numIgc.value = "";
+	pato.numIgd.value = "";
+	pato.numUg.value = "";
+	pato.numUgc.value = "";
+	pato.numUgd.value = "";
+	pato.numDg.value = "";
+	pato.numDgc.value = "";
+	pato.pageSize.value = "10";
+	pato.pageNow.value = "1";
+}
+</script>
+</head>
+<body>
+	<!--header-->
+	<div class="header">
+		<a href="http://www.sipo.gov.cn/"><img src="images/logo.jpg" /></a><a href="index.action"><img src="images/logo_r.jpg" /></a>
+	</div>
+	<ul class="nav">
+		<li><a href="index.action">首页</a></li>
+		<li><a href="gjcx.jsp">高级查询</a></li>
+		<li><a href="ipc.jsp">IPC分类查询</a></li>
+		<li><a href="loc.jsp">LOC分类查询</a></li>
+		<li><a href="flzt.jsp">事务数据查询</a></li>
+		<li><a href="sjsm.jsp">数据说明</a></li>
+	</ul>
+	<!--soso-->
+	<div class="soso_box2">
+		<dl>
+			<dt>
+				公布公告查询
+				<input onkeypress="javascript:if(event.keyCode == 13) patqs()" class="inputin" type="text" id="soso_text" value="" />
+				<input onclick="patqs()" class="sobtn" id="soso" type="image" src="images/soso_ann.png" />
+			</dt>
+			<dd>
+				<span><input name="lx" type="checkbox" value="ip" />发明公布</span>
+				<span><input name="lx" type="checkbox" value="ig" />发明授权</span>
+				<span><input name="lx" type="checkbox" value="ug" />实用新型</span>
+				<span><input name="lx" type="checkbox" value="dg" />外观设计</span>
+				<a href="sysm.jsp" target="_blank">使用说明</a>
+			</dd>
+		</dl>
+	</div>
+	<form action="patentoutline.action" id="pato" method="post">
+		<input type="hidden" name="showType" />
+		<input type="hidden" name="strSources" />
+		<input type="hidden" name="strWhere" />
+		<input type="hidden" name="numSortMethod" />
+		<input type="hidden" name="strLicenseCode" />
+		<input type="hidden" name="numIp" />
+		<input type="hidden" name="numIpc" />
+		<input type="hidden" name="numIg" />
+		<input type="hidden" name="numIgc" />
+		<input type="hidden" name="numIgd" />
+		<input type="hidden" name="numUg" />
+		<input type="hidden" name="numUgc" />
+		<input type="hidden" name="numUgd" />
+		<input type="hidden" name="numDg" />
+		<input type="hidden" name="numDgc" />
+		<input type="hidden" name="pageSize" />
+		<input type="hidden" name="pageNow" />
+	</form>
+	<form action="patentdetail.action" id="patd" method="post" target="_blank">
+		<input type="hidden" name="strSources" />
+		<input type="hidden" name="strWhere" />
+		<input type="hidden" name="strLicenseCode" />
+		<input type="hidden" name="pageSize" />
+		<input type="hidden" name="pageNow" />
+	</form>
+	<form action="fullTran.action" id="prsd" method="post" target="_blank">
+		<input type="hidden" name="an" />
+	</form>
+	<form action="pam.action" id="pam" method="post" target="_blank">
+		<input type="hidden" name="strSources" />
+		<input type="hidden" name="strWhere" />
+		<input type="hidden" name="recordCursor" />
+		<input type="hidden" name="strLicenseCode" />
+	</form>
+<div class="main">
+<div class="w187 left">
+<dl class="lxxz_dl">
+<dt>类型选择</dt>
+<dd><ul>
+</ul></dd>
+</dl>
+<dl class="lxxz_dl">
+<dt>排序方式</dt>
+<dd><ul>
+
+查询结果超过10000件不排序
+</ul></dd>
+</dl>
+</div>
+<!--right-->
+<div class="w790 right">
+	<dl class="list_dl">
+		<dd>
+			<ul>
+				<li><a class="hover" href="javascript:zl_gb();">公布模式</a></li>
+				<li class="lb_a"><a href="javascript:zl_lb();">列表模式</a></li>
+				<li class="ft_a"><a href="javascript:zl_ft();">附图模式</a></li>
+			</ul>
+		</dd>
+		<dt>
+			<select id="ts" onchange="zl_ts(10, 1)">
+				<option value="3">每页显示3条记录</option>
+				<option value="10" selected="selected">每页显示10条记录</option>
+			</select>
+		</dt>
+	</dl>
+<div class="cp_box">
+		<div class="cp_img">
+			<img src="images/cp_noimg.jpg" />
+				</div>
+		<div class="cp_linr">
+			<h1>
+				[发明公布]一种脑苷脂B化合物的应用</h1>
+			<ul>
+				<li class="wl228">申请公布号：CN102499933A</li>
+						<li class="wl228">申请公布日：2012.06.20</li>
+					<li class="wl228">申请号：2011103245613</li>
+				<li class="wl228">申请日：2009.11.23</li>
+				<li class="wl228">申请人：南京医科大学;&ensp;浙江大学;&ensp;厦门大学</li>
+				<li class="wl228">发明人：陈玲;<a href="javascript:;" class="zhankaizt"><img src="images/jtx.bmp" /></a>
+					<div style="display:none;">&ensp;戚建华;&ensp;戚智;&ensp;白银阳;&ensp;孙恺悦;&ensp;张卓;&ensp;高丽娟</div>
+				</li>
+				<li class="clear"></li>
+				<li>地址：210029江苏省南京市汉中路140号</li>
+				<li>分类号：A61K31/7032(2006.01)I;<a href="javascript:;" class="zhankai" style="color:#c5000f">全部</a><div style="display:none;"><ul>
+						<li>&ensp;A61P9/10(2006.01)I;&ensp;C07H15/10(2006.01)I;&ensp;C07H1/08(2006.01)I</li>
+						<li>专利代理机构：杭州求是专利事务所有限公司33200</li><li>代理人：张法高;&ensp;赵杭丽</li><li>分案原申请：2009101546750 2009.11.23</li></ul></div></li>
+				</ul>
+			<div class="cp_jsh">
+				<span id="tit">
+				摘要：</span>
+				本发明提供一种从鸡枞菌中提取制备的脑苷脂B化合物在制备治疗脑缺血后脑损伤药物中的应用。本发明通过药理实验证实所述的脑苷脂类化合物对缺血性脑损伤具有显著治疗作用，能透过血脑屏障，减小脑缺血导致的脑梗塞面积和减轻脑水肿，并减少神经细胞死亡，同时促进脑卒中<span style="display:none;">后运动和认知功能的恢复，降低脑卒中的死亡率。本发明开拓了脑苷脂类化合物新的药物用途，为治疗脑卒中疾病提供新的治疗药物。</span><a href='javascript:;' id="tit" class="zhankaizy">全部</a>
+				</div>
+			<p class="cp_botsm">
+				<span><a href="javascript:pam3('pip','CN102499933A','0');">【发明专利】</a></span>
+				<span><a href="javascript:pam3('pip','CN102499933A','1');">【发明专利申请】</a></span>
+				<span><a href="javascript:sw_xx('2011103245613');">事务数据</a></span>
+			</p>
+		</div>
+		<a class="qrcode" id="CN102499933A" href="qrcode/CN102499933A.png"><img src="qrcode/CN102499933A.png" width="74" height="74" /></a>
+	</div>
+<div class="cp_box">
+		<div class="cp_img">
+			<img src="images/cp_noimg.jpg" />
+				</div>
+		<div class="cp_linr">
+			<h1>
+				[发明公布]一种溶解丝蛋白的方法</h1>
+			<ul>
+				<li class="wl228">申请公布号：CN102417597A</li>
+						<li class="wl228">申请公布日：2012.04.18</li>
+					<li class="wl228">申请号：2010102944349</li>
+				<li class="wl228">申请日：2010.09.27</li>
+				<li class="wl228">申请人：浙江大学</li>
+				<li class="wl228">发明人：杨明英;<a href="javascript:;" class="zhankaizt"><img src="images/jtx.bmp" /></a>
+					<div style="display:none;">&ensp;朱良均;&ensp;闵思佳;&ensp;张海萍;&ensp;杨磊;&ensp;邓连霞</div>
+				</li>
+				<li class="clear"></li>
+				<li>地址：310012浙江省杭州市西湖区浙大路38号</li>
+				<li>分类号：C08J3/02(2006.01)I;<a href="javascript:;" class="zhankai" style="color:#c5000f">全部</a><div style="display:none;"><ul>
+						<li>&ensp;C08J3/12(2006.01)I;&ensp;C08L89/00(2006.01)I</li>
+						<li>专利代理机构：杭州中成专利事务所有限公司33212</li><li>代理人：金祺</li></ul></div></li>
+				</ul>
+			<div class="cp_jsh">
+				<span id="tit">
+				摘要：</span>
+				本发明公开了一种溶解丝蛋白的方法，包括以下步骤：将丝蛋白置于6M-8M尿素后，加入氢氧化钠固体粉末，或者先将氢氧化锂固体粉末溶于6M-8M尿素后，再将丝蛋白放于上述溶液中，室温下静置4-24hr，室温下搅拌均匀制得丝蛋白溶液。本发明的方法耗能低，生物安全性高，价格<span style="display:none;">低廉，操作简单方便，对环境无污染。此外，废液容易回收循环使用，本发明制备的丝蛋白粉末可应用于食品、化妆品、医药、生物材料等领域的原料。</span><a href='javascript:;' id="tit" class="zhankaizy">全部</a>
+				</div>
+			<p class="cp_botsm">
+				<span><a href="javascript:pam3('pip','CN102417597A','0');">【发明专利】</a></span>
+				<span><a href="javascript:pam3('pip','CN102417597A','1');">【发明专利申请】</a></span>
+				<span><a href="javascript:sw_xx('2010102944349');">事务数据</a></span>
+			</p>
+		</div>
+		<a class="qrcode" id="CN102417597A" href="qrcode/CN102417597A.png"><img src="qrcode/CN102417597A.png" width="74" height="74" /></a>
+	</div>
+<div class="cp_box">
+		<div class="cp_img">
+			<img src="images/cp_noimg.jpg" />
+				</div>
+		<div class="cp_linr">
+			<h1>
+				[发明公布]螺旋藻品系生产性状优劣的鉴别方法</h1>
+			<ul>
+				<li class="wl228">申请公布号：CN101104870</li>
+						<li class="wl228">申请公布日：2008.01.16</li>
+					<li class="wl228">申请号：2007100699622</li>
+				<li class="wl228">申请日：2007.07.09</li>
+				<li class="wl228">申请人：浙江大学</li>
+				<li class="wl228">发明人：汪志平;<a href="javascript:;" class="zhankaizt"><img src="images/jtx.bmp" /></a>
+					<div style="display:none;">&ensp;张巧生;&ensp;李雪斌;&ensp;黄晖;&ensp;杨灵勇</div>
+				</li>
+				<li class="clear"></li>
+				<li>地址：310027浙江省杭州市西湖区浙大路38号浙大应用生物科学系</li>
+				<li>分类号：C12Q1/68(2006.01)<a href="javascript:;" class="zhankai" style="color:#c5000f">全部</a>
+					<div style="display:none;"><ul>
+						<li>专利代理机构：杭州中成专利事务所有限公司</li><li>代理人：陈祯祥</li></ul></div>
+				</li>
+				</ul>
+			<div class="cp_jsh">
+				<span id="tit">
+				摘要：</span>
+				一种螺旋藻品系生产性状优劣的鉴别方法。通过提取5株螺旋藻Sp－1、Sp－2、Sp－3、Sp－10和Sp－NC的总DNA，通过电泳分析发现，根据总DNA中染色体外DNA(exDNA)的数量5株品系可以分为两大类：其中Sp－1、Sp－2、Sp－10和Sp－NC为一类，仅含一条exDNA；Sp－3为另一类，含有<span style="display:none;">2条exDNA。若候选品系总DNA中含2条exDNA时，可能为生产性状较好的品系，适合大规模生产；若总DNA中仅含1条exDNA时，可能为生产性状差的品系，不可用于工厂化生产。</span><a href='javascript:;' id="tit" class="zhankaizy">全部</a>
+				</div>
+			<p class="cp_botsm">
+				<span><a href="javascript:pam3('pip','CN101104870','0');">【发明专利申请】</a></span>
+				<span><a href="javascript:sw_xx('2007100699622');">事务数据</a></span>
+			</p>
+		</div>
+		<a class="qrcode" id="CN101104870" href="qrcode/CN101104870.png"><img src="qrcode/CN101104870.png" width="74" height="74" /></a>
+	</div>
+<div class="cp_box">
+		<div class="cp_img">
+			<img src="images/cp_noimg.jpg" />
+				</div>
+		<div class="cp_linr">
+			<h1>
+				[发明公布]一种锐钛型膨润土基多孔二氧化钛纳米材料的制备方法</h1>
+			<ul>
+				<li class="wl228">申请公布号：CN101104525</li>
+						<li class="wl228">申请公布日：2008.01.16</li>
+					<li class="wl228">申请号：2007100707031</li>
+				<li class="wl228">申请日：2007.08.06</li>
+				<li class="wl228">申请人：浙江大学</li>
+				<li class="wl228">发明人：朱利中;<a href="javascript:;" class="zhankaizt"><img src="images/jtx.bmp" /></a>
+					<div style="display:none;">&ensp;屈芳;&ensp;杨坤;&ensp;吕金泽</div>
+				</li>
+				<li class="clear"></li>
+				<li>地址：310027浙江省杭州市浙大路38号</li>
+				<li>分类号：C01G23/053(2006.01);<a href="javascript:;" class="zhankai" style="color:#c5000f">全部</a><div style="display:none;"><ul>
+						<li>&ensp;B01J20/06(2006.01);&ensp;B82B3/00(2006.01)</li>
+						<li>专利代理机构：杭州求是专利事务所有限公司</li><li>代理人：张法高</li></ul></div></li>
+				</ul>
+			<div class="cp_jsh">
+				<span id="tit">
+				摘要：</span>
+				本发明公开了一种锐钛型膨润土基多孔二氧化钛纳米材料的制备方法。制备方法是：将脱水干燥后的有机膨润土或处理废水后废弃的有机膨润土加入胺和钛酸酯类的混合物或直接加入钛酸酯类，混匀，离心，弃去上清液，固体部分经烘干高温焙烧去除表面活性剂和有机物质，即得。<span style="display:none;">本发明所制得的材料比表面积大，晶粒较小，粒径单一，孔分布均匀，孔径介于微孔和中孔之间，孔隙有序度高；主要为锐钛型，具有较高的催化活性，可应用于室内有机污染物净化领域。本发明同时很好地解决了废弃的有机膨润土的最终处置问题，利用处理废水后废弃的有机膨润土，达到以废治废。该制备方法能耗低，制备过程简单易行、无需加酸和优化控制pH值，适于大规模工程化应用。</span><a href='javascript:;' id="tit" class="zhankaizy">全部</a>
+				</div>
+			<p class="cp_botsm">
+				<span><a href="javascript:pam3('pip','CN101104525','0');">【发明专利】</a></span>
+				<span><a href="javascript:pam3('pip','CN101104525','1');">【发明专利申请】</a></span>
+				<span><a href="javascript:sw_xx('2007100707031');">事务数据</a></span>
+			</p>
+		</div>
+		<a class="qrcode" id="CN101104525" href="qrcode/CN101104525.png"><img src="qrcode/CN101104525.png" width="74" height="74" /></a>
+	</div>
+<div class="cp_box">
+		<div class="cp_img">
+			<img src="images/cp_noimg.jpg" />
+				</div>
+		<div class="cp_linr">
+			<h1>
+				[发明公布]一种2-溴-4-硝基苯乙腈的合成方法</h1>
+			<ul>
+				<li class="wl228">申请公布号：CN101402589</li>
+						<li class="wl228">申请公布日：2009.04.08</li>
+					<li class="wl228">申请号：2008101222206</li>
+				<li class="wl228">申请日：2008.11.04</li>
+				<li class="wl228">申请人：浙江大学</li>
+				<li class="wl228">发明人：陈新志;&ensp;刘金强</li>
+				<li class="clear"></li>
+				<li>地址：310027浙江省杭州市西湖区浙大路38号</li>
+				<li>分类号：C07C255/35(2006.01)I;&ensp;C07C253/30(2006.01)I<a href="javascript:;" class="zhankai" style="color:#c5000f">全部</a>
+					<div style="display:none;"><ul>
+						<li>专利代理机构：杭州中成专利事务所有限公司</li><li>代理人：金祺</li></ul></div>
+				</li>
+				</ul>
+			<div class="cp_jsh">
+				<span id="tit">
+				摘要：</span>
+				本发明公开了一种2－溴－4－硝基苯乙腈的合成方法：以苯乙腈为主要起始原料，包括以下步骤：1)硝化：苯乙腈在由浓硫酸和浓硝酸组成的混酸中搅拌反应；将所得的反应产物放入冰水中，有固体析出，过滤，得析出物；再将析出物依次经水洗和干燥，得对硝基苯乙腈；2)溴化：<span style="display:none;">将对硝基苯乙腈溶解在浓硫酸中，加入N－溴代丁二酰亚胺进行溴代；将所得的反应混合物放入冰水中，有固体析出，过滤，得析出物；再将析出物依次经水洗和干燥，得2－溴－4－硝基苯乙腈。采用本发明的方法合成2－溴－4－硝基苯乙腈，具有工艺简单、成本低、收率高的特点。</span><a href='javascript:;' id="tit" class="zhankaizy">全部</a>
+				</div>
+			<p class="cp_botsm">
+				<span><a href="javascript:pam3('pip','CN101402589','0');">【发明专利】</a></span>
+				<span><a href="javascript:pam3('pip','CN101402589','1');">【发明专利申请】</a></span>
+				<span><a href="javascript:sw_xx('2008101222206');">事务数据</a></span>
+			</p>
+		</div>
+		<a class="qrcode" id="CN101402589" href="qrcode/CN101402589.png"><img src="qrcode/CN101402589.png" width="74" height="74" /></a>
+	</div>
+<div class="cp_box">
+		<div class="cp_img">
+			<img onerror="javascript:this.src='images/cp_noimg.jpg';" src="pic/wshgg7100/PUBXML/20080116/FMGB/FMGB_DZGBD/2007100695941/100005/200710069594_thumb.jpg" />
+				</div>
+		<div class="cp_linr">
+			<h1>
+				[发明公布]采用氦3－氦4双工质的液氦温区斯特林型多级脉管制冷机</h1>
+			<ul>
+				<li class="wl228">申请公布号：CN101105345</li>
+						<li class="wl228">申请公布日：2008.01.16</li>
+					<li class="wl228">申请号：2007100695941</li>
+				<li class="wl228">申请日：2007.08.03</li>
+				<li class="wl228">申请人：浙江大学</li>
+				<li class="wl228">发明人：甘智华;<a href="javascript:;" class="zhankaizt"><img src="images/jtx.bmp" /></a>
+					<div style="display:none;">&ensp;邱利民;&ensp;曹强;&ensp;李卓裴;&ensp;代黎</div>
+				</li>
+				<li class="clear"></li>
+				<li>地址：310027浙江省杭州市浙大路38号</li>
+				<li>分类号：F25B9/14(2006.01)<a href="javascript:;" class="zhankai" style="color:#c5000f">全部</a>
+					<div style="display:none;"><ul>
+						<li>专利代理机构：杭州求是专利事务所有限公司</li><li>代理人：张法高</li></ul></div>
+				</li>
+				</ul>
+			<div class="cp_jsh">
+				<span id="tit">
+				摘要：</span>
+				本发明公开了一种采用氦3－氦4双工质的液氦温区斯特林型多级脉管制冷机。氦4压缩机经第一级回热器与第二级回热器相连接，第一级回热器经冷头与第一级脉管、第一级调相机构相连接，第二级回热器冷头经第二级脉管与第二级调相机构相连接，第二级脉管冷头经热桥与第三级回<span style="display:none;">热器中部相连接，第三级回热器热端与氦3压缩机相连接，第三级回热器冷头与第三级脉管冷头相连接，第三级脉管热端与第三级调相机构相连接，第三级脉管热端经热桥与第三级回热器中部相连接。本发明在第一、第二级采用工质氦4，在制冷温度最低的第三级采用性能更好的工质氦3，从而节省了氦3的用量，降低了成本。同时比完全采用氦4为工质的方案达到更好的效果。</span><a href='javascript:;' id="tit" class="zhankaizy">全部</a>
+				</div>
+			<p class="cp_botsm">
+				<span><a href="javascript:pam3('pip','CN101105345','0');">【发明专利申请】</a></span>
+				<span><a href="javascript:sw_xx('2007100695941');">事务数据</a></span>
+			</p>
+		</div>
+		<a class="qrcode" id="CN101105345" href="qrcode/CN101105345.png"><img src="qrcode/CN101105345.png" width="74" height="74" /></a>
+	</div>
+<div class="cp_box">
+		<div class="cp_img">
+			<img src="images/cp_noimg.jpg" />
+				</div>
+		<div class="cp_linr">
+			<h1>
+				[发明公布]提高菜籽/大豆出油率的方法</h1>
+			<ul>
+				<li class="wl228">申请公布号：CN101100626</li>
+						<li class="wl228">申请公布日：2008.01.09</li>
+					<li class="wl228">申请号：2007100702339</li>
+				<li class="wl228">申请日：2007.07.26</li>
+				<li class="wl228">申请人：浙江大学</li>
+				<li class="wl228">发明人：于勇;&ensp;郑文钟</li>
+				<li class="clear"></li>
+				<li>地址：310027浙江省杭州市西湖区浙大路38号</li>
+				<li>分类号：C11B1/02(2006.01);&ensp;C11B1/06(2006.01)<a href="javascript:;" class="zhankai" style="color:#c5000f">全部</a>
+					<div style="display:none;"><ul>
+						<li>专利代理机构：杭州中成专利事务所有限公司</li><li>代理人：唐银益</li></ul></div>
+				</li>
+				</ul>
+			<div class="cp_jsh">
+				<span id="tit">
+				摘要：</span>
+				本发明公开了一种提高菜籽/大豆出油率的方法，包括以下步骤：1)将菜籽或者大豆进行5～10kGy辐射剂量的辐照；2)将辐照后的菜籽或大豆采用常规榨油工艺进行榨油。采用本发明的方法，既能有效利用现有的常规榨油工艺，又能提高菜籽/大豆的出油率。</div>
+			<p class="cp_botsm">
+				<span><a href="javascript:pam3('pip','CN101100626','0');">【发明专利申请】</a></span>
+				<span><a href="javascript:sw_xx('2007100702339');">事务数据</a></span>
+			</p>
+		</div>
+		<a class="qrcode" id="CN101100626" href="qrcode/CN101100626.png"><img src="qrcode/CN101100626.png" width="74" height="74" /></a>
+	</div>
+<div class="cp_box">
+		<div class="cp_img">
+			<img onerror="javascript:this.src='images/cp_noimg.jpg';" src="pic/wshgg7100/PUBXML/20070117/FMGB/FMGB_DZGBD/2006100520482/100005/200610052048_thumb.jpg" />
+				</div>
+		<div class="cp_linr">
+			<h1>
+				[发明公布]一类含偶氮苯染料的硅氧烷先驱体及其合成方法</h1>
+			<ul>
+				<li class="wl228">申请公布号：CN1896081</li>
+						<li class="wl228">申请公布日：2007.01.17</li>
+					<li class="wl228">申请号：2006100520482</li>
+				<li class="wl228">申请日：2006.06.19</li>
+				<li class="wl228">申请人：浙江大学</li>
+				<li class="wl228">发明人：钱国栋;<a href="javascript:;" class="zhankaizt"><img src="images/jtx.bmp" /></a>
+					<div style="display:none;">&ensp;崔元靖;&ensp;陈鹭剑;&ensp;王智宇;&ensp;邱建荣;&ensp;樊先平;&ensp;洪樟连;&ensp;王民权</div>
+				</li>
+				<li class="clear"></li>
+				<li>地址：310027浙江省杭州市西湖区浙大路38号</li>
+				<li>分类号：C07F7/18(2006.01)<a href="javascript:;" class="zhankai" style="color:#c5000f">全部</a>
+					<div style="display:none;"><ul>
+						<li>专利代理机构：杭州求是专利事务所有限公司</li><li>代理人：韩介梅</li></ul></div>
+				</li>
+				</ul>
+			<div class="cp_jsh">
+				<span id="tit">
+				摘要：</span>
+				本发明公开了一类含偶氮苯染料的硅氧烷先驱体，其结构通式如式1，其中，R为氰基、硝基或氯原子。将含R基团的偶氮苯染料与异氰酸基丙基三乙氧基硅烷进行加成反应即得含偶氮苯染料的硅氧烷先驱体。该类硅氧烷先驱体合成工艺简单，纯化容易，可用来制备化学键连型的无机－<span style="display:none;">有机杂化材料，有望在电光调制、光开关以及相位共轭等非线性光学领域得到实际应用。</span><a href='javascript:;' id="tit" class="zhankaizy">全部</a>
+				</div>
+			<p class="cp_botsm">
+				<span><a href="javascript:pam3('pip','CN1896081','0');">【发明专利】</a></span>
+				<span><a href="javascript:pam3('pip','CN1896081','1');">【发明专利申请】</a></span>
+				<span><a href="javascript:sw_xx('2006100520482');">事务数据</a></span>
+			</p>
+		</div>
+		<a class="qrcode" id="CN1896081" href="qrcode/CN1896081.png"><img src="qrcode/CN1896081.png" width="74" height="74" /></a>
+	</div>
+<div class="cp_box">
+		<div class="cp_img">
+			<img src="images/cp_noimg.jpg" />
+				</div>
+		<div class="cp_linr">
+			<h1>
+				[发明公布]原状软粘土空心圆柱试样制样法</h1>
+			<ul>
+				<li class="wl228">申请公布号：CN101101241</li>
+						<li class="wl228">申请公布日：2008.01.09</li>
+					<li class="wl228">申请号：2007100701177</li>
+				<li class="wl228">申请日：2007.07.20</li>
+				<li class="wl228">申请人：浙江大学</li>
+				<li class="wl228">发明人：周建;<a href="javascript:;" class="zhankaizt"><img src="images/jtx.bmp" /></a>
+					<div style="display:none;">&ensp;温晓贵;&ensp;沈扬;&ensp;张金良;&ensp;张泉芳</div>
+				</li>
+				<li class="clear"></li>
+				<li>地址：310027浙江省杭州市浙大路38号</li>
+				<li>分类号：G01N1/08(2006.01);&ensp;G01N1/28(2006.01)<a href="javascript:;" class="zhankai" style="color:#c5000f">全部</a>
+					<div style="display:none;"><ul>
+						<li>专利代理机构：杭州求是专利事务所有限公司</li><li>代理人：张法高</li></ul></div>
+				</li>
+				</ul>
+			<div class="cp_jsh">
+				<span id="tit">
+				摘要：</span>
+				本发明公开了一种原状软粘土空心圆柱试样制样方法。包括如下步骤：1)将原状软粘土空心圆柱试样内芯切取器安置于内芯切取器定位板上；2)安放原状试样于主动转盘与从动转盘间，用钢丝锯、刮刀切割外壁。外壁成形后，放置卡位护环、两瓣式钢膜等配件固定试样；3)推进内芯<span style="display:none;">切取器钻杆，利用螺旋钻头及拆卸式刀锋片切取试样内芯；4)每次取芯深度达2cm时，旋出钻杆，掏挖积土，再复位钻头，重复取芯；5)取芯累计深度超过试样标准高度2cm时停止取芯；6)取下试样，削平试样的上下端部，完成试样制备。本发明能成功制备原状软粘土空心圆柱试样，制备过程中扰动、挤土效应小，为开展复杂应力条件下原状软粘土的试验研究提供了设备保证。</span><a href='javascript:;' id="tit" class="zhankaizy">全部</a>
+				</div>
+			<p class="cp_botsm">
+				<span><a href="javascript:pam3('pip','CN101101241','0');">【发明专利】</a></span>
+				<span><a href="javascript:pam3('pip','CN101101241','1');">【发明专利申请】</a></span>
+				<span><a href="javascript:sw_xx('2007100701177');">事务数据</a></span>
+			</p>
+		</div>
+		<a class="qrcode" id="CN101101241" href="qrcode/CN101101241.png"><img src="qrcode/CN101101241.png" width="74" height="74" /></a>
+	</div>
+<div class="cp_box">
+		<div class="cp_img">
+			<img onerror="javascript:this.src='images/cp_noimg.jpg';" src="pic/wshgg7100/PUBXML/20080109/FMGB/FMGB_DZGBD/2007100701035/100005/200710070103_thumb.jpg" />
+				</div>
+		<div class="cp_linr">
+			<h1>
+				[发明公布]纳米复合碳化硅陶瓷及其制备方法</h1>
+			<ul>
+				<li class="wl228">申请公布号：CN101100384</li>
+						<li class="wl228">申请公布日：2008.01.09</li>
+					<li class="wl228">申请号：2007100701035</li>
+				<li class="wl228">申请日：2007.07.20</li>
+				<li class="wl228">申请人：浙江大学</li>
+				<li class="wl228">发明人：郭兴忠;<a href="javascript:;" class="zhankaizt"><img src="images/jtx.bmp" /></a>
+					<div style="display:none;">&ensp;杨辉;&ensp;李海淼;&ensp;傅培鑫;&ensp;高黎华</div>
+				</li>
+				<li class="clear"></li>
+				<li>地址：310027浙江省杭州市西湖区浙大路38号</li>
+				<li>分类号：C04B35/576(2006.01);&ensp;C04B35/577(2006.01)<a href="javascript:;" class="zhankai" style="color:#c5000f">全部</a>
+					<div style="display:none;"><ul>
+						<li>专利代理机构：杭州中成专利事务所有限公司</li><li>代理人：唐银益</li></ul></div>
+				</li>
+				</ul>
+			<div class="cp_jsh">
+				<span id="tit">
+				摘要：</span>
+				本发明公开了一种纳米复合碳化硅陶瓷的制备方法，以碳化硅、钇铝石榴石和纳米颗粒组成主原料，包括以下步骤：1)将上述主原料、粘结剂、水溶性高分子混合物溶胶和分散剂加入去离子水中，球磨混合后，配制成固相含量为30％～60％水基碳化硅浆料；2)采用喷雾造粒工艺对水<span style="display:none;">基碳化硅浆料进行喷雾干燥，得碳化硅造粉粒；3)对碳化硅造粉粒采用二步方式成型，获得高密度的碳化硅素坯；4)将上述碳化硅素坯放在真空无压烧结炉中烧结。本发明还公开了上述方法所制备的纳米复合碳化硅陶瓷。该方法工艺简便，所制备的碳化硅陶瓷性能优越。</span><a href='javascript:;' id="tit" class="zhankaizy">全部</a>
+				</div>
+			<p class="cp_botsm">
+				<span><a href="javascript:pam3('pip','CN101100384','0');">【发明专利】</a></span>
+				<span><a href="javascript:pam3('pip','CN101100384','1');">【发明专利申请】</a></span>
+				<span><a href="javascript:sw_xx('2007100701035');">事务数据</a></span>
+			</p>
+		</div>
+		<a class="qrcode" id="CN101100384" href="qrcode/CN101100384.png"><img src="qrcode/CN101100384.png" width="74" height="74" /></a>
+	</div>
+<div class="next">
+<a href="javascript:zl_fy(1);" class="hover">1</a>
+<a href="javascript:zl_fy(2);" >2</a>
+<a href="javascript:zl_fy(3);" >3</a>
+<a href="javascript:zl_fy(4);" >4</a>
+<a href="javascript:zl_fy(5);" >5</a>
+<a>...</a><a href="javascript:zl_fy(1095);">1095</a>
+<a href="javascript:zl_fy(2);">&gt;</a><span>转到 <input class="w50" type="text" id="pn" value="" onkeypress="javascript:if(event.keyCode == 13) zl_tz(1095)" /> 页 </span></div></div>
+</div>
+<img style="display:none" src="images/waiting.gif" />
+<div class="clear"></div>
+<!--footer-->
+<div class="footer">
+<dl>
+<dt><img src="images/foot_logo.jpg" /></dt>
+<dd>
+<ul>
+<li><a href="bqsm.jsp">版权声明</a>|<a href="lxwm.jsp">联系我们</a></li>
+<li>主办单位：国家知识产权局　软件维护：知识产权出版社　ICP备案编号：京ICP05069085号</li>
+<li>版权所有：国家知识产权局（未经许可不得复制）　技术支持：010-62086415/6466</li>
+</ul>
+</dd>
+<script type="text/javascript">document.write(unescape("%3Cspan id='_ideConac' %3E%3C/span%3E%3Cscript src='http://dcs.conac.cn/js/33/000/0000/60412369/CA330000000604123690015.js' type='text/javascript'%3E%3C/script%3E"));</script>
+</dl>
+</div>
+<div style="display:none;"><script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F06635991e58cd892f536626ef17b3348' type='text/javascript'%3E%3C/script%3E"));
+</script></div>
+<script ignoreapd='1' type='text/javascript' src='http://static.gridsumdissector.com/js/Clients/GWD-000530-B8BCC7/gs.js'></script>
+</body>
+</html>
